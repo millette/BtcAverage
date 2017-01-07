@@ -3,7 +3,8 @@ var request = require('request');
 var async = require('async');
 var Promise = require("bluebird");
 // var getExchangeRates = require("get-exchange-rates-usd");
-var smartaverage = require('smartaverage');
+// var smartaverage = require('smartaverage');
+var niceAverage = require('./niceaverage');
 var providers = require('./providers');
 
 var TIMEOUT = 20000;
@@ -16,15 +17,11 @@ var MINIMUM_VALUES_VARIANCE = 3;
  * @param {Object} jsonData
  * @param {String} path
  */
-function findValueByPath(jsonData, path, currency, rate) {
+function findValueByPath(jsonData, path) {
   var errorParts = false;
   path.split('.').forEach(function(part) {
     if (!errorParts) {
-      if (currency) {
-        jsonData = jsonData[part] / rate;
-      } else {
-        jsonData = jsonData[part]
-      }
+      jsonData = jsonData[part]
       if (!jsonData) errorParts = true;
     }
   });
@@ -71,7 +68,8 @@ module.exports = function getPrice() {
       }
     }),
     function(err, prices) {
-      var infoAverage = smartaverage(ACCEPTABLE_VARIANCE, MINIMUM_VALUES_VARIANCE, prices);
+      var infoAverage = niceAverage(prices.filter((x) => x))
+      //var infoAverage = smartaverage(ACCEPTABLE_VARIANCE, MINIMUM_VALUES_VARIANCE, prices);
       if (infoAverage) {
         var pricesProviders = {};
         prices.forEach(function(price, i) {
