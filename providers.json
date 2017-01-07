@@ -40,16 +40,6 @@
     "path": "ask"
   },
   {
-    "name": "CoinTrader",
-    "url": "https://www.cointrader.net/api3/stats/daily",
-    "path": "data.BTCUSD.offer"
-  },
-  {
-    "name": "LoyalBit",
-    "url": "https://www.loyalbit.com/api/ticker",
-    "path": "ask"
-  },
-  {
     "name": "Bitex.la",
     "url": "https://bitex.la/api-v1/rest/btc/market/ticker",
     "path": "ask"
@@ -63,12 +53,6 @@
     "name": "Bitpay",
     "url": "https://bitpay.com/api/rates/USD",
     "path": "rate"
-  },
-  {
-    "name": "Unocoin",
-    "url": "https://www.unocoin.com/trade?all",
-    "path": "buy",
-    "currency": "INR"
   },
   {
     "name": "itbit",
